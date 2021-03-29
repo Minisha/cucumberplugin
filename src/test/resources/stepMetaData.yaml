@@ -1,0 +1,19 @@
+data:
+  - id: someid
+    api:
+     url: "http://www.google.com"
+    metadata:
+     team: marvel
+     microservice: rusty
+     jira:
+       - NEX-123
+       - NEX-234
+  - id: someid_1
+    api:
+      url: "http://www.instagram.com"
+    metadata:
+      team: gryffindor
+      microservice: phoenix
+      jira:
+        - NEX-12
+        - NEX-212

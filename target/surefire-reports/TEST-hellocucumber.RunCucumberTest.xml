@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="hellocucumber.RunCucumberTest" time="0.172" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="hellocucumber.RunCucumberTest" time="0.214" errors="1" skipped="0">
   <properties>
     <property name="idea.version" value="2020.3.2"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -58,5 +58,60 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase classname="Is it Friday yet?" name="Sunday isn&apos;t Friday" time="0.172"/>
+  <testcase classname="Is it Friday yet?" name="Sunday isn&apos;t Friday" time="0.214">
+    <error message="Cannot invoke &quot;hellocucumber.repository.StepRepository.save(Object)&quot; because &quot;this.stepRepository&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;hellocucumber.repository.StepRepository.save(Object)&quot; because &quot;this.stepRepository&quot; is null
+	at hellocucumber.service.StepService.saveStep(StepService.java:15)
+	at hellocucumber.listener.StepListener.handleTestStepFinished(StepListener.java:59)
+	at io.cucumber.core.eventbus.AbstractEventPublisher.send(AbstractEventPublisher.java:51)
+	at io.cucumber.core.eventbus.AbstractEventBus.send(AbstractEventBus.java:12)
+	at io.cucumber.core.runtime.SynchronizedEventBus.send(SynchronizedEventBus.java:47)
+	at io.cucumber.core.runtime.ThreadLocalRunnerSupplier$LocalEventBus.send(ThreadLocalRunnerSupplier.java:66)
+	at io.cucumber.core.runner.TestStep.emitTestStepFinished(TestStep.java:124)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:74)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:151)
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:135)
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:199)
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:90)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:234)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>
+@tag1 @tag2
+Scenario: Sunday isn&apos;t Friday        &amp;#27;[90m# hellocucumber/test.feature:5&amp;#27;[0m
+  &amp;#27;[32mGiven &amp;#27;[0m&amp;#27;[32mtoday is Sunday&amp;#27;[0m              &amp;#27;[90m# hellocucumber.StepDefinitions.today_is_Sunday()&amp;#27;[0m
+Status: PASSED
+Id: c3503070-6706-4134-9c8c-1f3677e447d5
+Code Location: hellocucumber.StepDefinitions.today_is_Sunday()
+Get Step:io.cucumber.core.gherkin.messages.GherkinMessagesStep@e260766
+</system-out>
+  </testcase>
 </testsuite>

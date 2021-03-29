@@ -1,16 +1,23 @@
 package hellocucumber.listener;
 
-import hellocucumber.StepDefinitions;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import hellocucumber.entity.StepEntity;
+import hellocucumber.model.Data;
+import hellocucumber.model.Root;
+import hellocucumber.service.StepService;
+import io.cucumber.datatable.internal.difflib.StringUtills;
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.*;
 
-import javax.sound.midi.Soundbank;
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class StepListener implements ConcurrentEventListener {
 
+    private static final List<Data> stepMetaData = getMetaData();
 
     @Override
     public void setEventPublisher(EventPublisher publisher) {
@@ -25,8 +32,50 @@ public class StepListener implements ConcurrentEventListener {
         if (event.getTestStep() instanceof PickleStepTestStep) {
             PickleStepTestStep testStep = (PickleStepTestStep) event.getTestStep();
             System.out.println("Get Step:" + testStep.getStep());
-            System.out.println(extractId(testStep));
+            String stepId = extractId(testStep);
+
+            //Read from the config file, given the stepId;
+
+            //TODO write to db
+
+            Data metaData = getMetaData(stepId);
+
+            StepEntity entity = new StepEntity();
+            entity.setStepId(stepId);
+
+            Status status = event.getResult().getStatus();
+            entity.setStatus(status.name());
+            entity.setJira(StringUtills.join(metaData.getMetadata().getJira(), ","));
+            entity.setScenarioName(event.getTestCase().getName());
+            entity.setStepName(testStep.getStep().getText());
+            entity.setApi(metaData.getApi().getUrl());
+
+            //entity.setExpectedResult(event.getResult().ge);
+            //entity.setActualResult();
+            //entity.setTraceId();
+
+
+            StepService stepService = new StepService();
+            stepService.saveStep(entity);
+
+
         }
+    }
+
+    private Data getMetaData(String stepId) {
+        return stepMetaData.stream().filter(r ->r.getId().equalsIgnoreCase(stepId)).findFirst().get();
+    }
+
+    private static List<Data> getMetaData() {
+        Root root = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            //mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+            root = mapper.readValue(new File("/Users/minisha/workspace/hellocucumber/src/test/resources/stepMetaData.yaml"), Root.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return root.getData();
     }
 
     //  hellocucumber.StepDefinitions.today_is_Sunday()
