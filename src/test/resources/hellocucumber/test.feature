@@ -3,6 +3,6 @@ Feature: Is it Friday yet?
 
   @tag1 @tag2
   Scenario: Sunday isn't Friday
-    Given today is Sunday
-    When I ask whether it's Friday yet
-    Then I should be told "Nope"
+    [Group: id1] Given today is Sunday
+    [Group: id1] When I ask whether it's Friday yet
+    [Group: id1] Then I should be told "Nope"
