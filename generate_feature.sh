@@ -51,8 +51,6 @@ createDirectoryIfNotExist() {
                   echo "Directory doesn't exist. Creating now"
                   mkdir -p $dirname
                   # echo "Directory created"
-          else
-                  # echo "Directory exists"
           fi
   fi
 }
